@@ -3,5 +3,13 @@
     "twitterLinkText": "Chanoch's twitter feed",
     "linkedinLink": "https://linkedin.com/chanoch",
     "linkedinLinkText": "Chanoch's Linked In profile",
-    "rights": "© 2018 chanoch.com. All rights reserved."
+    "rights": "© 2018 chanoch.com. All rights reserved.",
+    "email": "email@chanoch.com",
+    "title": "chanoch.com",
+    "strapline": "Software Delivery",
+    "headerLinkText": "Linked In",
+    "menuItems": [
+        {"key": "home", "link": "/index.html", "linkText": "Home" },
+        {"key": "recipes", "link": "/recipes.html", "linkText": "Recipes" }
+    ]
 }

@@ -1,15 +1,3 @@
-import React from 'react';
+import PhoneLink from './PhoneLink';
 
-export default class PhoneLink extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const {number} = this.props;
-        const telLink = "tel:"+number;
-        return (
-            <a href={telLink}>{number}</a>
-        )
-    }
-}
+export default PhoneLink;

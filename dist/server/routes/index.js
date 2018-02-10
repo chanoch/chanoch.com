@@ -3,12 +3,13 @@ var router = express.Router();
 const sgMail = require('@sendgrid/mail');
 
 var Recaptcha = require('../components/RecaptchaMiddleware');
-var recaptcha = new Recaptcha('6LfMe0QUAAAAACovgF08FO92SAEPlaLOdKOF27tN', process.env.recaptcha_secret);
+var recaptcha = new Recaptcha('', process.env.recaptcha_secret);
 
 router.post('/contact', recaptcha.middleware.verify, function(req, res, next) {
-    var recaptcha_success = true;
+    var recaptcha_success = 'true';
+    
     if(req.recaptcha.error) {
-        recaptcha_success = false;
+        recaptcha_success = req.recaptcha.error.message;
     }
 
     var contact_email = req.body.email,

@@ -11140,17 +11140,6 @@ input[type='time']
         font-size: 2rem;
     }
 }
-.section_home .signature_img
-{
-    width: 150px;
-}
-@media (max-width: 991px)
-{
-    .section_home .signature_img
-    {
-        margin-bottom: 3rem;
-    }
-}
 @media (max-width: 991px)
 {
     .section_about__img

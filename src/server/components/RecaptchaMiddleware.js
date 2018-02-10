@@ -14,13 +14,15 @@ module.exports = class RecaptchaMiddleware{
         this._options = options || {checkremoteip:false}
         if (!this._site_key) {
             console.warn("No site key - won't use recaptcha");
+            this.use_recaptcha = false;
         }
         if (!this._secret_key) {
             console.warn("No secret key - won't use recaptcha");
+            this.use_recaptcha = false;
         }
     }
     get middleware() {
-        if(use_recaptcha) {
+        if(this.use_recaptcha) {
             return {
                 verify: (req, res, next) => {
                     this.verify(req, (error, data) => {
@@ -32,8 +34,10 @@ module.exports = class RecaptchaMiddleware{
         } else {
             return {
                 verify: (req,res,next) => {
-                    console.log("Middleware bypassed");
-                    return next();        
+                    var bypassed = {message: "bypassed"};
+                    var data = null;
+                    req.recaptcha = {bypassed, data}
+                    next();        
                 }
             }
         }
@@ -75,13 +79,11 @@ module.exports = class RecaptchaMiddleware{
                     cb(null, {hostname: result.hostname})
                 }
                 else {
-                    console.log('Got error' + error);
                     cb(error, null);
                 }
             })
             res.on('error', (e) => { 
-                console.log('Got an error '+ e.message);
-                cb(e.message, null) 
+                cb(e, null) 
             });
         })
         request.write(query_string)
