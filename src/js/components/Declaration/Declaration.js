@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import './declaration.css';
+import './declaration.css';
 
 /**
  * Title and lead text in the middle

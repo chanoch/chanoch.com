@@ -6,6 +6,8 @@ import Layout from './Layout';
 
 import config from '../../config';
 
+import './css/HomePage.css';
+
 import home from '../../data/home.json';
 
 export default class HomePage extends Component {

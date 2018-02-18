@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+import './footer.css';
+import '../Social/social.css';
+
 export default class Footer extends Component {
     render () {
         const {rights, twitterLink, twitterLInkText, linkedinLink, linkedinLinkText} = this.props;

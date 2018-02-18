@@ -92,6 +92,13 @@ if(process.env.NODE_ENV==='productio') {
 
 app.use(index); // mount contact me form post end point
 
+app.use('/recipes/', function(req,res) {
+    res.sendFile(path.join(__dirname, '../public/recipes.htm'))
+});
+app.use('/recipes/*.html', function(req,res) {
+    res.sendFile(path.join(__dirname, '../public/recipes.htm'))
+});
+
 // all .html files should end up being service spa
 app.use('*.html', function(req, res) {
     res.sendFile(path.join(__dirname, '../public/index.htm'));

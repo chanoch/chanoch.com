@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
+import Divider from '../components/Divider';
 import Footer from '../components/Footer';
 
 export default class Layout extends React.Component {
@@ -18,14 +19,14 @@ export default class Layout extends React.Component {
                     leftLink={config.linkedinLink} 
                     leftLinkText={config.headerLinkText} />
 
+                <Divider />
+                <Navigation active={active} menuItems={config.menuItems}/>
+                <Divider />
+
                 <section className="section">
                     <div className="container">
-                        <div className="row justify-content-between pb-5">
-                            <div className="col-sm-12 col-md-7 col-lg-7 col-xl-6 order-first order-sm-2">                            
-            
-                                <Navigation active={active} menuItems={config.menuItems}/>
-                                <h1 className="section__heading">{title}</h1>
-
+                        <div className="row justify-content-between">
+                            <div className="col-12">
                                 {this.props.children}
                             </div>
                         </div>

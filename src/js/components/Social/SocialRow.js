@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import './social.css';
+
 class SocialRow extends Component {
     render () {
         return (
