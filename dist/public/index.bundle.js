@@ -2504,16 +2504,15 @@ var resolve = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        console.log(context);
                         _iteratorNormalCompletion = true;
                         _didIteratorError = false;
                         _iteratorError = undefined;
-                        _context.prev = 4;
+                        _context.prev = 3;
                         _iterator = (0, _getIterator3.default)(routes);
 
-                    case 6:
+                    case 5:
                         if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                            _context.next = 20;
+                            _context.next = 19;
                             break;
                         }
 
@@ -2522,77 +2521,77 @@ var resolve = function () {
                         params = matchURI(route.path, uri);
 
                         if (params) {
-                            _context.next = 12;
+                            _context.next = 11;
                             break;
                         }
 
-                        return _context.abrupt('continue', 17);
+                        return _context.abrupt('continue', 16);
 
-                    case 12:
-                        _context.next = 14;
+                    case 11:
+                        _context.next = 13;
                         return route.action((0, _extends3.default)({}, context));
 
-                    case 14:
+                    case 13:
                         result = _context.sent;
 
                         if (!result) {
-                            _context.next = 17;
+                            _context.next = 16;
                             break;
                         }
 
                         return _context.abrupt('return', result);
 
-                    case 17:
+                    case 16:
                         _iteratorNormalCompletion = true;
-                        _context.next = 6;
+                        _context.next = 5;
                         break;
 
-                    case 20:
-                        _context.next = 26;
+                    case 19:
+                        _context.next = 25;
                         break;
 
-                    case 22:
-                        _context.prev = 22;
-                        _context.t0 = _context['catch'](4);
+                    case 21:
+                        _context.prev = 21;
+                        _context.t0 = _context['catch'](3);
                         _didIteratorError = true;
                         _iteratorError = _context.t0;
 
-                    case 26:
+                    case 25:
+                        _context.prev = 25;
                         _context.prev = 26;
-                        _context.prev = 27;
 
                         if (!_iteratorNormalCompletion && _iterator.return) {
                             _iterator.return();
                         }
 
-                    case 29:
-                        _context.prev = 29;
+                    case 28:
+                        _context.prev = 28;
 
                         if (!_didIteratorError) {
-                            _context.next = 32;
+                            _context.next = 31;
                             break;
                         }
 
                         throw _iteratorError;
 
+                    case 31:
+                        return _context.finish(28);
+
                     case 32:
-                        return _context.finish(29);
+                        return _context.finish(25);
 
                     case 33:
-                        return _context.finish(26);
-
-                    case 34:
                         error = new Error('Route not found');
 
                         error.status = 404;
                         throw error;
 
-                    case 37:
+                    case 36:
                     case 'end':
                         return _context.stop();
                 }
             }
-        }, _callee, this, [[4, 22, 26, 34], [27,, 29, 33]]);
+        }, _callee, this, [[3, 21, 25, 33], [26,, 28, 32]]);
     }));
 
     return function resolve(_x, _x2) {

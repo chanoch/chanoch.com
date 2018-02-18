@@ -7,7 +7,7 @@ function matchURI(path, uri) {
     if (!match) return null;
     const params = Object.create(null);
     for (let i = 1; i < match.length; i++) {
-        params[keys[i - 1].name] =
+        params[keys[i-1].name] =
         match[i] !== undefined ? match[i] : undefined;
     }
     return params;
@@ -21,7 +21,7 @@ async function resolve(routes, context) {
         const result = await route.action({ ...context });
         if (result) return result;
     }
-    const error = new Error('Not found');
+    const error = new Error('Route not found');
     error.status = 404;
     throw error;
 }
