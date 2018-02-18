@@ -1,7 +1,7 @@
 [
     {
         "key": "salmon",
-        "title": "Salmon, Lentils and Asparagus",
+        "name": "Salmon, Lentils and Asparagus",
         "method": {
             "type": "Carnivore",
             "alternatives": [
@@ -48,78 +48,81 @@
         }
     },{
         "key": "spagbol",
-        "title": "Spaghetti and Meatballs",
+        "name": "Spaghetti and Meatballs"
     },{
         "key": "pizza",
-        "title": "Pizza"
+        "name": "Pizza"
     },{
         "key": "pastabake",
-        "title": "Pasta Bake"
+        "name": "Pasta Bake"
     },{
         "key": "burgers",
-        "title": "Burgers with salad"
+        "name": "Burgers with salad"
     },{
         "key": "omelette",
-        "title": "Omelette"
+        "name": "Omelette"
     },{
         "key": "Risotto",
-        "title": "Ristotto with Veg"
+        "name": "Risotto with Veg"
     },{
         "key": "seafoodrisotto",
-        "title": "Seafood Risotto"
+        "name": "Seafood Risotto"
     },{
         "key": "pies",
-        "title": "Steak and Kidney Pies"
+        "name": "Steak and Kidney Pies"
     },{
         "key": "kievs",
-        "title": "Chicken Kievs"
+        "name": "Chicken Kievs"
     },{
         "key": "toad",
-        "title": "Toast in the Hole"
+        "name": "Toast in the Hole"
     },{
         "key": "pastasausages",
-        "title": "Sausages and Pasta"
+        "name": "Sausages and Pasta"
     },{
         "key": "beanpastie",
-        "title": "Bean Pastie"
+        "name": "Bean Pastie"
     },{
         "key": "curry",
-        "title": "Curry"
+        "name": "Curry"
     },{
         "key": "Fajitas",
-        "title": "Fajitas"
+        "name": "Fajitas"
     },{
         "key": "vegpie",
-        "title": "Vegetable Pie"
+        "name": "Vegetable Pie"
     },{
         "key": "burritos",
-        "title": "Burritos"
+        "name": "Burritos"
     },{
         "key": "spinachpancakes",
-        "title": "Spinach and Cheese Stuffed Pancakes"
+        "name": "Spinach and Cheese Stuffed Pancakes"
     },{
         "key": "couscous",
-        "title": "Couscous"
+        "name": "Couscous"
     },{
         "key": "bakedpotato",
-        "title": "Baked Potato"
+        "name": "Baked Potato"
     },{
         "key": "greektart",
-        "title": "Greek Tart"
+        "name": "Greek Tart"
     },{
         "key": "stirfry",
-        "title": "Stir Fry"
+        "name": "Stir Fry"
     },{
         "key": "fritters",
-        "title": "Pea and Halloumi Fritters"
+        "name": "Pea and Halloumi Fritters"
     },{
         "key": "seabass",
-        "title": "Sea Bass"
+        "name": "Sea Bass"
     },{
         "key": "macandcheese",
-        "title": "Macaroni and Cheese"
-    },{
+        "name": "Macaroni and Cheese"
+        },{
+            "key": "riceegg",
+            "name": "Rice, scrambled eggs, and peas"
+        },{
         "key": "tacos",
-        "title": "Tacos"
+        "name": "Tacos"
     }
 ]
