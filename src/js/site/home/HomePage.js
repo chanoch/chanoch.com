@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 
-import Divider from '../components/Divider';
-import Signature from '../components/Signature'
-import Layout from './Layout';
+import Divider from '../../components/Divider';
+import Signature from '../../components/Signature'
+import Layout from '../Layout';
 
-import config from '../../config';
+import config from '../../../config';
 
-import './css/HomePage.css';
-
-import home from '../../data/home.json';
+import home from '../../../data/home.json';
 
 export default class HomePage extends Component {
     render () {

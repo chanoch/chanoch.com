@@ -12,7 +12,7 @@
 import ReactDOM from 'react-dom';
 import history from '../components/History';
 import router from '../components/Router';
-import routes from './routes';
+import routes from './home/routes';
 
 function renderComponent(component) {
     ReactDOM.render(component, document.getElementById('root'));

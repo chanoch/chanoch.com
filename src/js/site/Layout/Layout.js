@@ -1,9 +1,11 @@
 import React from 'react';
 
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
-import Divider from '../components/Divider';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import Navigation from '../../components/Navigation';
+import Divider from '../../components/Divider';
+import Footer from '../../components/Footer';
+
+import './layout.css';
 
 export default class Layout extends React.Component {
     constructor(props) {
