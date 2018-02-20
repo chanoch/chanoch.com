@@ -97,6 +97,8 @@ if(process.env.NODE_ENV==='productio') {
 var contact_form = require('./routes/contact'); // not currently implemented
 app.use(contact_form); // mount contact me form post end point
 
+var recipe_api = require('./routes/recipe_api'); // add recipes listing
+app.use(recipe_api); 
 
 app.use('/recipes/', function(req,res) {
     res.sendFile(path.join(__dirname, '../public/recipes.htm'))

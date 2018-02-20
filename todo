@@ -1,5 +1,4 @@
-Add mongo recipes api endpoint
-
+Wire up recipes page to recipes endpoint
 
 
 
@@ -25,3 +24,4 @@ Add recipes entry point
 data-hover adds css effect to recipes
 Layout
 Signature font
+Add mongo recipes api endpoint
