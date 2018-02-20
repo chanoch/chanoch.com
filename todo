@@ -1,9 +1,10 @@
+Add mongo recipes api endpoint
 
-Add recipes
-Add recipes entry point
-data-hover
-Layout
-Signature font
+
+
+
+
+
 node sass
 menu suppress default
 google tag manager
@@ -12,16 +13,15 @@ menu title green
 make menu out of data
 Make routing and menu based on same data set
 
-newtheme.css - make recipes work visually
-theme.css
 
-app.css - add livereload
-package.json
-
-Layout.js 
-Move config call from each page
-
-
-Move recipe into app
-Recipe.js
-index.js
+DONE
+====
+make recipes work visually
+Add live reload
+Move config to pages from Layout
+Make recipe page work - add and remove to menu selection
+Add recipes
+Add recipes entry point
+data-hover adds css effect to recipes
+Layout
+Signature font

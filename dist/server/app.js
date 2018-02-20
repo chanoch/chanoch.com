@@ -9,10 +9,6 @@ var csp = require('helmet-csp');
 
 var compression = require('compression');
 
-var ErrorHandler = require('express-error-handler');
-
-var index = require('./routes/index'); // contact form
-
 var app = express();
 
 if(process.env.NODE_ENV!=='production') {
@@ -39,7 +35,8 @@ app.use(function(req, res, next) {
     else
         next();
 });
-  
+
+// Add Content Source Policy - CSP
 if(process.env.NODE_ENV==='productio') {
     console.log('Setting up CSP');
     app.use(csp({
@@ -97,7 +94,9 @@ if(process.env.NODE_ENV==='productio') {
     }))
 }
 
-app.use(index); // mount contact me form post end point
+var contact_form = require('./routes/contact'); // not currently implemented
+app.use(contact_form); // mount contact me form post end point
+
 
 app.use('/recipes/', function(req,res) {
     res.sendFile(path.join(__dirname, '../public/recipes.htm'))
@@ -120,18 +119,13 @@ app.use('/', function(req, res) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-var errorHandler = ErrorHandler({
-  static: {
-    '500': './dist/public/error.htm',
-    '404': './dist/public/error.htm',
-  }
-}) 
-
-app.use(errorHandler);
+app.use(function(err, req,res,next) {
+    next(err);
+});
 
 module.exports = app;
