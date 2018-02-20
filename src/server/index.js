@@ -4,16 +4,37 @@
  * Module dependencies.
  */
 
-var app = require('./app');
 var debug = require('debug')('chanoch.com:server');
 var http = require('http');
+var Promise = require('bluebird');
 
 /**
- * Get port from environment and store in Express.
+ * Get port from environment to store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '3002');
+
+var app = require('./app');
 app.set('port', port);
+
+/**
+ * Connect to db
+ */
+const MongoClient = require('mongodb').MongoClient;
+
+if(process.env.MONGO_SERVER) { 
+    var DB_URI = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PW}@${process.env.MONGO_SERVER}`;
+    MongoClient.connect(DB_URI, {promiseLibrary: Promise})
+    .catch(err => {
+        console.error(`Can't connect to mlab ${err.stack}`);
+    })
+    .then(db => {
+        if(db) {
+            app.locals.db = db.db('wiggers_menu');
+        }
+    });
+} else {
+    console.error('Starting without mongo.');
+}
 
 /**
  * Create HTTP server.
