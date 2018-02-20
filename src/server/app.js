@@ -14,6 +14,13 @@ var ErrorHandler = require('express-error-handler');
 var index = require('./routes/index'); // contact form
 
 var app = express();
+
+if(process.env.NODE_ENV!=='production') {
+    var livereload = require('livereload').createServer({
+        debug: true
+    }); 
+    livereload.watch(__dirname + '/..');
+}
 // app.use(compression);
 
 // TODO uncomment when you've created a favicon

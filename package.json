@@ -50,6 +50,7 @@
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.3.1",
     "css-loader": "^0.28.9",
+    "livereload": "^0.6.3",
     "path": "^0.12.7",
     "style-loader": "^0.20.1",
     "webpack": "^3.10.0",
