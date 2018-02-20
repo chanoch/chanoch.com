@@ -11,3 +11,17 @@ menu transitions
 menu title green
 make menu out of data
 Make routing and menu based on same data set
+
+newtheme.css - make recipes work visually
+theme.css
+
+app.css - add livereload
+package.json
+
+Layout.js 
+Move config call from each page
+
+
+Move recipe into app
+Recipe.js
+index.js

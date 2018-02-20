@@ -7,13 +7,15 @@ import Footer from '../../components/Footer';
 
 import './layout.css';
 
+import config from '../../../config';
+
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
     } 
  
     render() {
-        const { title, active, config } =  this.props;
+        const { title, active } =  this.props;
         return (
             <div>
                 <Header title={config.title} 

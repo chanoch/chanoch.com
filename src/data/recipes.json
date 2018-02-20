@@ -118,10 +118,10 @@
     },{
         "key": "macandcheese",
         "name": "Macaroni and Cheese"
-        },{
-            "key": "riceegg",
-            "name": "Rice, scrambled eggs, and peas"
-        },{
+    },{
+        "key": "riceegg",
+        "name": "Rice, scrambled eggs, and peas"
+    },{
         "key": "tacos",
         "name": "Tacos"
     }

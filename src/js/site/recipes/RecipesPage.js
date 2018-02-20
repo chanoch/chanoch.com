@@ -1,26 +1,23 @@
 import React from 'react';
 
 import Layout from '../Layout';
-
 import Divider from '../../components/Divider';
-import Signature from '../../components/Signature'
-import Recipe from '../../components/Recipe';
 
-import config from '../../../config';
+import Recipe from './Recipe';
 
 export default (props) => {
-    const {selected, recipes} = props;
+    const {selected, recipes, select, deselect} = props;
     return (
-        <Layout title="Wiggers family recipes." config={config} active={"Recipes"}>
+        <Layout title="Wiggers family recipes." active={"Recipes"}>
             <div className="col-12">
                 <h1 className="section__heading">Selected</h1>
                 {selected.map((recipe) => {
-                    return <Recipe key={recipe.key} name={recipe.name} />
+                    return <Recipe recipeId={recipe.key} key={recipe.key} name={recipe.name} onClick={deselect} />
                 })}
                 <Divider />
                 <h1 className="section__heading">Recipes</h1>
                 {recipes.map((recipe) => {
-                    return <Recipe key={recipe.key} name={recipe.name} />
+                    return <Recipe recipeId={recipe.key} key={recipe.key} name={recipe.name} onClick={select} />
                 })}
             </div>
         </Layout>
