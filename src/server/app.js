@@ -100,11 +100,11 @@ app.use(contact_form); // mount contact me form post end point
 var recipe_api = require('./routes/recipe_api'); // add recipes listing
 app.use(recipe_api); 
 
-app.use('/recipes/', function(req,res) {
-    res.sendFile(path.join(__dirname, '../public/recipes.htm'))
+app.use('/menuplanner/', function(req,res) {
+    res.sendFile(path.join(__dirname, '../public/menuplanner.htm'))
 });
-app.use('/recipes/*.html', function(req,res) {
-    res.sendFile(path.join(__dirname, '../public/recipes.htm'))
+app.use('/menuplanner/*.html', function(req,res) {
+    res.sendFile(path.join(__dirname, '../public/menuplanner.htm'))
 });
 
 // all .html files should end up being service spa

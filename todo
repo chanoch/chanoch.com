@@ -1,15 +1,22 @@
 
 Create new menu action - make this the default page for MenuApp
+Create a select menu action 
+Integrate history with redux
+Split moveElement into a remove and an add - NORMALISE!
+Combined *Page with Connected*Page
+Add loading spinner during async load of recipes
 Modify add recipe to add to menu
 Modify render recipes reducer to filter out menu recipes
 Modify deselect recipe to remove from menu
 Add set menu function
 Change recipes page and menu link to say menu planner
 Separate out MenuApp into a separate web app with it's own routing
+Add labels to MenuPlannerPage as config
+Docs - on site
+
 
 Action, action creator, action type, Reducers blog
 How to load async initial from state when creating the store blog
-
 
 
 node sass

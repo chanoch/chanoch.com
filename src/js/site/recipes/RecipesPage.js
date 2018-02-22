@@ -8,7 +8,7 @@ import Recipe from './Recipe';
 export default (props) => {
     const {selected, recipes, select, deselect} = props;
     return (
-        <Layout title="Wiggers family recipes." active={"Recipes"}>
+        <Layout title="Wiggers family menu planner." active={"Menu Planner"}>
             <div className="col-12">
                 <h1 className="section__heading">Selected</h1>
                 {selected.map((recipe) => {

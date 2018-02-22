@@ -10,6 +10,6 @@
     "headerLinkText": "Linked In",
     "menuItems": [
         {"key": "home", "link": "/index.html", "linkText": "Home" },
-        {"key": "recipes", "link": "/recipes/", "linkText": "Recipes" }
+        {"key": "menuplanner", "link": "/menuplanner/", "linkText": "Menu Planner" }
     ]
 }

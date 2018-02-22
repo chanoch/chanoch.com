@@ -5,8 +5,8 @@ import RecipesPage from './RecipesPage';
 import {selectRecipe} from './redux/SelectRecipe';
 import {deselectRecipe} from './redux/DeselectRecipe';
 
-const mapStateToRecipePageProps = (state) => {
-    const selected = state.selected;
+const mapStateToProps = (state) => {
+    const selected = state.menu.selected;
     const recipes = state.recipes;
     return {
         selected,
@@ -14,15 +14,15 @@ const mapStateToRecipePageProps = (state) => {
     }
 };
 
-const mapDispatchToRecipePageProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
     select: (id) => dispatch(selectRecipe(id)),
     deselect: (id) => dispatch(deselectRecipe(id))
 });
 
 const ConnectedRecipesPage = 
         connect(
-            mapStateToRecipePageProps, 
-            mapDispatchToRecipePageProps
+            mapStateToProps, 
+            mapDispatchToProps
         )(RecipesPage);
 
 export default ConnectedRecipesPage;
