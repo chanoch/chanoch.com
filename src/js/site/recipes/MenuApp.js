@@ -1,13 +1,22 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+
+import {SelectRecipeMiddleware} from './redux/SelectRecipe';
+import {DeselectRecipeMiddleware} from './redux/DeselectRecipe';
+import {ListRecipesMiddleware, receiveRecipes} from './redux/ListRecipes';
+
+import {fetchRecipes} from './service/recipes';
 
 import {rootReducer} from './ReduxActions';
 
-// async action to load from api endpoint
-import recipes from '../../../data/recipes.json';
+const store = createStore(rootReducer, {recipes: [], selected: []}, applyMiddleware(
+    SelectRecipeMiddleware(),
+    DeselectRecipeMiddleware(),
+    ListRecipesMiddleware(),
+)); 
 
-const store = createStore(rootReducer, {recipes, selected: []});
+fetchRecipes(recipes => store.dispatch(receiveRecipes(recipes)));
 
 import ConnectedRecipesPage from './ConnectedRecipesPage';
 

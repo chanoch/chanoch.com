@@ -10,16 +10,26 @@ export function deselectRecipe(key) {
 }
 
 /**
- * Deselect a recipe and move it from the .recipes array to the .selected array of 
- * recipes
+ * Show the updated recipes and selected lists once the recipe was moved between them
  * 
- * @param {Object} state - containing two arrays, recipes and selected
+ * @param {Object} state - unused
  * @param {Object} action - containing a .key property to identify the object
  */
 export function deselectRecipeReducer(state, action) {
-    const updated = moveElement(action.key, state.selected, state.recipes);
     return {
-        selected: updated.source,
-        recipes: updated.target,
+        selected: action.selected,
+        recipes: action.recipes,
+    }
+}
+
+export function DeselectRecipeMiddleware() {
+    return store => despatch => action => {
+        if(action.type === DESELECT_RECIPE) {
+            const state = store.getState();
+            const updated = moveElement(action.key, state.selected, state.recipes);
+            action.selected = updated.source;
+            action.recipes = updated.target;
+        }
+        despatch(action);
     }
 }

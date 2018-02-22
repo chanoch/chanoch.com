@@ -7259,6 +7259,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.SELECT_RECIPE = undefined;
 exports.selectRecipe = selectRecipe;
 exports.selectRecipeReducer = selectRecipeReducer;
+exports.SelectRecipeMiddleware = SelectRecipeMiddleware;
 
 var _Utils = __webpack_require__(193);
 
@@ -7275,14 +7276,32 @@ function selectRecipe(key) {
  * Select a recipe and move it from the .recipes array to the .selected array of 
  * recipes
  * 
- * @param {Object} state - containing two arrays, recipes and selected
+ * @param {Object} state - not used
  * @param {Object} action - containing a .key property to identify the object
  */
 function selectRecipeReducer(state, action) {
-    var updated = (0, _Utils.moveElement)(action.key, state.recipes, state.selected);
     return {
-        recipes: updated.source,
-        selected: updated.target
+        selected: action.selected,
+        recipes: action.recipes
+    };
+}
+
+/** 
+ * If action is select recipe, move recipe from recipes list to selected list.
+*/
+function SelectRecipeMiddleware() {
+    return function (store) {
+        return function (dispatch) {
+            return function (action) {
+                var state = store.getState();
+                if (action.type === SELECT_RECIPE) {
+                    var updated = (0, _Utils.moveElement)(action.key, state.recipes, state.selected);
+                    action.recipes = updated.source;
+                    action.selected = updated.target;
+                }
+                dispatch(action);
+            };
+        };
     };
 }
 
@@ -7334,6 +7353,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.DESELECT_RECIPE = undefined;
 exports.deselectRecipe = deselectRecipe;
 exports.deselectRecipeReducer = deselectRecipeReducer;
+exports.DeselectRecipeMiddleware = DeselectRecipeMiddleware;
 
 var _Utils = __webpack_require__(193);
 
@@ -7347,17 +7367,31 @@ function deselectRecipe(key) {
 }
 
 /**
- * Deselect a recipe and move it from the .recipes array to the .selected array of 
- * recipes
+ * Show the updated recipes and selected lists once the recipe was moved between them
  * 
- * @param {Object} state - containing two arrays, recipes and selected
+ * @param {Object} state - unused
  * @param {Object} action - containing a .key property to identify the object
  */
 function deselectRecipeReducer(state, action) {
-    var updated = (0, _Utils.moveElement)(action.key, state.selected, state.recipes);
     return {
-        selected: updated.source,
-        recipes: updated.target
+        selected: action.selected,
+        recipes: action.recipes
+    };
+}
+
+function DeselectRecipeMiddleware() {
+    return function (store) {
+        return function (despatch) {
+            return function (action) {
+                if (action.type === DESELECT_RECIPE) {
+                    var state = store.getState();
+                    var updated = (0, _Utils.moveElement)(action.key, state.selected, state.recipes);
+                    action.selected = updated.source;
+                    action.recipes = updated.target;
+                }
+                despatch(action);
+            };
+        };
     };
 }
 
@@ -7531,21 +7565,27 @@ var _reactRedux = __webpack_require__(180);
 
 var _redux = __webpack_require__(184);
 
+var _SelectRecipe = __webpack_require__(192);
+
+var _DeselectRecipe = __webpack_require__(194);
+
+var _ListRecipes = __webpack_require__(267);
+
+var _recipes = __webpack_require__(274);
+
 var _ReduxActions = __webpack_require__(266);
 
-var _recipes = __webpack_require__(267);
-
-var _recipes2 = _interopRequireDefault(_recipes);
-
-var _ConnectedRecipesPage = __webpack_require__(268);
+var _ConnectedRecipesPage = __webpack_require__(269);
 
 var _ConnectedRecipesPage2 = _interopRequireDefault(_ConnectedRecipesPage);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_ReduxActions.rootReducer, { recipes: _recipes2.default, selected: [] });
+var store = (0, _redux.createStore)(_ReduxActions.rootReducer, { recipes: [], selected: [] }, (0, _redux.applyMiddleware)((0, _SelectRecipe.SelectRecipeMiddleware)(), (0, _DeselectRecipe.DeselectRecipeMiddleware)(), (0, _ListRecipes.ListRecipesMiddleware)()));
 
-// async action to load from api endpoint
+(0, _recipes.fetchRecipes)(function (recipes) {
+    return store.dispatch((0, _ListRecipes.receiveRecipes)(recipes));
+});
 
 var MenuApp = function (_React$Component) {
     (0, _inherits3.default)(MenuApp, _React$Component);
@@ -9416,14 +9456,18 @@ var _SelectRecipe = __webpack_require__(192);
 
 var _DeselectRecipe = __webpack_require__(194);
 
+var _ListRecipes = __webpack_require__(267);
+
 function rootReducer(state, action) {
     switch (action.type) {
         case '@@redux/INIT':
-            return state;
-        case 'SELECT_RECIPE':
+            return (0, _ListRecipes.listRecipesReducer)(state, action);
+        case _SelectRecipe.SELECT_RECIPE:
             return (0, _SelectRecipe.selectRecipeReducer)(state, action);
-        case 'DESELECT_RECIPE':
+        case _DeselectRecipe.DESELECT_RECIPE:
             return (0, _DeselectRecipe.deselectRecipeReducer)(state, action);
+        case _ListRecipes.RECEIVE_RECIPES:
+            return (0, _ListRecipes.receiveRecipesReducer)(state, action);
         default:
             return state;
     }
@@ -9431,12 +9475,89 @@ function rootReducer(state, action) {
 
 /***/ }),
 /* 267 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = [{"key":"salmon","name":"Salmon, Lentils and Asparagus","method":{"type":"Carnivore","alternatives":[{"Pescatarian":"Substitute parma ham for foil"}],"time":[{"preparation":10,"uom":"minutes"},{"cooking":30,"uom":"minutes"}],"reminders":[{"time":"8:00","text":"Defrost salmon"}],"ingredients":[{"key":1,"text":"Salmon","quantity":120,"uom":"g","prepare":"Salt the salmon on both sides, add pepper and herbs, lemon juice, and olive oil as desired. Wrap each piece of salmon with Parma Ham or foil leaving the ends showing."},{"key":2,"text":"Lentils","quantity":50,"uom":"g","prepare":"Weight out lentils"},{"key":3,"text":"Asparagus","quantity":0.33,"uom":"packet","prepare":"Snap or cut about an inch or two from the bottoms off each stalk. Make sure they fit in the pan."},{"key":4,"text":"Fresh Spinach Leaves","quantity":1,"uom":"handful","optional":true},{"key":5,"text":"Creme Freche","quantity":50,"uom":"g","optional":true},{"key":6,"text":"Parma Ham","quantity":1,"uom":"slice","optional":true},{"key":7,"text":"Herbs","quantity":1,"uom":"pinch","optional":true},{"key":8,"text":"Olive Oil","quantity":1,"uom":"tbsp","pantry":true},{"key":9,"text":"Lemon Juice","quantity":1,"uom":"tbsp","pantry":true},{"key":10,"text":"Salt","quantity":1,"uom":"pinch","pantry":true}],"equipment":[{"key":"Pan","quantity":2,"size":"medium"},{"key":"Oven tray","quantity":1},{"key":"Collander","quantity":1,"reason":"To drain the asparagus"},{"key":"Sieve","quantity":1,"reason":"To drain the lentils"}],"prepare":[{"key":1,"time":0,"duration":15,"text":"Preheat Oven to 180C, you can oil the oven tray and preheat it in the oven too."},{"key":2,"time":0,"duration":3,"text":"Boil kettle for lentils - use plenty of water"},{"key":3,"time":7,"duration":3,"text":"Add lentils and a pinch of salt to boiling water and bring back to boiling point","ingredients":[2,10]},{"key":4,"time":10,"duration":20,"text":"Boil lentils on high for 20 minutes"},{"key":5,"time":15,"duration":3,"text":"Boil kettle for asparagus"},{"key":6,"time":28,"duration":5,"text":"Add hot water to second pan and bring to boil with a pinch of salt. Don't add asparagus yet."},{"key":7,"time":30,"duration":11,"text":"Put Salmon in oven on a baking tray, skin side down to make sure the skin crisps.","ingredients":[1]},{"key":8,"time":31,"duration":10,"text":"Turn down the heat on the lentils and simmer them for 10-15 minutes."},{"key":9,"time":34,"duration":7,"text":"Add asparagus to the pan, bring to the boil and then boil on a medium heat for 4-5 minutes.","ingredients":[3]},{"key":10,"time":41,"duration":1,"text":"Taste lentils to check they are cooked then drain. Stir in olive oil and spinach leaves and leave to stand.","ingredients":[4]},{"key":11,"time":42,"duration":2,"text":"Put the salmon skin side up on the plate, and arrange the Asparagus to one side. Add the lentils to the plate with a dollop of creme freche on top then season to taste. Serve.","ingredients":[5]}]}},{"key":"spagbol","name":"Spaghetti and Meatballs"},{"key":"pizza","name":"Pizza"},{"key":"pastabake","name":"Pasta Bake"},{"key":"burgers","name":"Burgers with salad"},{"key":"omelette","name":"Omelette"},{"key":"Risotto","name":"Risotto with Veg"},{"key":"seafoodrisotto","name":"Seafood Risotto"},{"key":"pies","name":"Steak and Kidney Pies"},{"key":"kievs","name":"Chicken Kievs"},{"key":"toad","name":"Toast in the Hole"},{"key":"pastasausages","name":"Sausages and Pasta"},{"key":"beanpastie","name":"Bean Pastie"},{"key":"curry","name":"Curry"},{"key":"Fajitas","name":"Fajitas"},{"key":"vegpie","name":"Vegetable Pie"},{"key":"burritos","name":"Burritos"},{"key":"spinachpancakes","name":"Spinach and Cheese Stuffed Pancakes"},{"key":"couscous","name":"Couscous"},{"key":"bakedpotato","name":"Baked Potato"},{"key":"greektart","name":"Greek Tart"},{"key":"stirfry","name":"Stir Fry"},{"key":"fritters","name":"Pea and Halloumi Fritters"},{"key":"seabass","name":"Sea Bass"},{"key":"macandcheese","name":"Macaroni and Cheese"},{"key":"riceegg","name":"Rice, scrambled eggs, and peas"},{"key":"tacos","name":"Tacos"}]
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.LIST_RECIPES_FAILED = exports.RECEIVE_RECIPES = exports.LIST_RECIPES = undefined;
+exports.listRecipes = listRecipes;
+exports.ListRecipesMiddleware = ListRecipesMiddleware;
+exports.listRecipeFailed = listRecipeFailed;
+exports.receiveRecipes = receiveRecipes;
+exports.receiveRecipesReducer = receiveRecipesReducer;
+exports.listRecipesReducer = listRecipesReducer;
+
+var _recipes = __webpack_require__(274);
+
+var LIST_RECIPES = exports.LIST_RECIPES = 'LIST_RECIPES';
+var RECEIVE_RECIPES = exports.RECEIVE_RECIPES = 'RECEIVE_RECIPES';
+var LIST_RECIPES_FAILED = exports.LIST_RECIPES_FAILED = 'LIST_RECIPES_FAILED';
+
+// added this action creator just in case but the reducer is currently invoked by the @@redux/INIT action
+function listRecipes() {
+    return {
+        type: LIST_RECIPES
+    };
+}
+
+/** 
+ * Async mutating middleware that loads the full list of recipes and then dispatches an action to render
+ * them 
+ */
+function ListRecipesMiddleware() {
+    return function (store) {
+        return function (dispatch) {
+            return function (action) {
+                dispatch(action);
+                if (action.key === 'LIST_RECIPES') {
+                    (0, _recipes.fetchRecipes)(function (recipes) {
+                        return dispatch(receiveRecipes(recipes));
+                    });
+                }
+            };
+        };
+    };
+}
+
+function listRecipeFailed() {
+    return {
+        type: LIST_RECIPES_FAILED
+    };
+}
+
+function receiveRecipes(recipes) {
+    return {
+        type: RECEIVE_RECIPES,
+        recipes: recipes,
+        selected: [],
+        receivedAt: Date.now()
+    };
+}
+
+function receiveRecipesReducer(state, action) {
+    return {
+        recipes: action.recipes,
+        selected: action.selected
+    };
+}
+
+/**
+ * List all recipes (ASYNC)
+ * 
+ * @param {Object} state - to add the list of available recipes to
+ * @param {Object} action - identifies this action
+ */
+function listRecipesReducer(state, action) {
+    return state;
+}
 
 /***/ }),
-/* 268 */
+/* 268 */,
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9448,7 +9569,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(180);
 
-var _RecipesPage = __webpack_require__(269);
+var _RecipesPage = __webpack_require__(270);
 
 var _RecipesPage2 = _interopRequireDefault(_RecipesPage);
 
@@ -9483,7 +9604,7 @@ var ConnectedRecipesPage = (0, _reactRedux.connect)(mapStateToRecipePageProps, m
 exports.default = ConnectedRecipesPage;
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9505,7 +9626,7 @@ var _Divider = __webpack_require__(70);
 
 var _Divider2 = _interopRequireDefault(_Divider);
 
-var _Recipe = __webpack_require__(270);
+var _Recipe = __webpack_require__(271);
 
 var _Recipe2 = _interopRequireDefault(_Recipe);
 
@@ -9545,7 +9666,7 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9579,7 +9700,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(271);
+__webpack_require__(272);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9640,11 +9761,11 @@ var Recipe = function (_Component) {
 exports.default = Recipe;
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(272);
+var content = __webpack_require__(273);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -9690,7 +9811,7 @@ if(false) {
 }
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(9)(false);
@@ -9702,6 +9823,30 @@ exports.push([module.i, ".recipe {\n    margin-bottom: 0rem;\n    padding: 0rem;
 
 // exports
 
+
+/***/ }),
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.fetchRecipes = fetchRecipes;
+
+var _axios = __webpack_require__(206);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function fetchRecipes(next) {
+    _axios2.default.get('http://localhost:3002/api/v1/recipes').then(function (response) {
+        return next(response.data);
+    });
+}
 
 /***/ })
 ],[236]);

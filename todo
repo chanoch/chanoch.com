@@ -1,6 +1,14 @@
-Wire up recipes page to recipes endpoint
 
+Create new menu action - make this the default page for MenuApp
+Modify add recipe to add to menu
+Modify render recipes reducer to filter out menu recipes
+Modify deselect recipe to remove from menu
+Add set menu function
+Change recipes page and menu link to say menu planner
+Separate out MenuApp into a separate web app with it's own routing
 
+Action, action creator, action type, Reducers blog
+How to load async initial from state when creating the store blog
 
 
 
@@ -25,3 +33,4 @@ data-hover adds css effect to recipes
 Layout
 Signature font
 Add mongo recipes api endpoint
+Wire up recipes page to recipes endpoint
