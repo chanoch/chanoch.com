@@ -17,7 +17,9 @@ export function deselectRecipe(key) {
  */
 export function deselectRecipeReducer(state, action) {
     return {
-        selected: action.selected,
+        menu: {
+            selected: action.selected
+        },
         recipes: action.recipes,
     }
 }
@@ -26,7 +28,7 @@ export function DeselectRecipeMiddleware() {
     return store => despatch => action => {
         if(action.type === DESELECT_RECIPE) {
             const state = store.getState();
-            const updated = moveElement(action.key, state.selected, state.recipes);
+            const updated = moveElement(action.key, state.menu.selected, state.recipes);
             action.selected = updated.source;
             action.recipes = updated.target;
         }

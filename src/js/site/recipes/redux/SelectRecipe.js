@@ -18,7 +18,9 @@ export function selectRecipe(key) {
  */
 export function selectRecipeReducer(state, action) {
     return {
-        selected: action.selected,
+        menu: {
+            selected: action.selected,
+        },
         recipes: action.recipes,
     }
 }
@@ -30,7 +32,7 @@ export function SelectRecipeMiddleware() {
     return store => dispatch => action => {
         const state = store.getState();
         if(action.type === SELECT_RECIPE) {
-            const updated = moveElement(action.key, state.recipes, state.selected);
+            const updated = moveElement(action.key, state.recipes, state.menu.selected);
             action.recipes = updated.source;
             action.selected = updated.target;    
         }

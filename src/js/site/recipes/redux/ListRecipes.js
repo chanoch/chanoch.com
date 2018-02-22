@@ -42,7 +42,9 @@ export function receiveRecipes(recipes) {
 export function receiveRecipesReducer(state, action) {
     return {
         recipes: action.recipes,
-        selected: action.selected,
+        menu: {
+            selected: action.selected,
+        }
     }
 }
 
