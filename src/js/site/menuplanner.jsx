@@ -12,11 +12,11 @@ import {createStore, applyMiddleware} from 'redux';
 import {SelectRecipeMiddleware} from './recipes/redux/SelectRecipe';
 import {DeselectRecipeMiddleware} from './recipes/redux/DeselectRecipe';
 import {ListRecipesMiddleware, receiveRecipes} from './recipes/redux/ListRecipes';
+import { CreateMenuMiddleware } from './recipes/redux/CreateNewMenu';
 
 import {fetchRecipes} from './recipes/service/recipes';
 
-import {rootReducer} from './recipes/ReduxActions';
-import { CreateMenuMiddleware } from './recipes/redux/CreateNewMenu';
+import {rootReducer} from './recipes/RootReducer';
 
 const store = createStore(rootReducer, {recipes: [], selected: []}, applyMiddleware(
     SelectRecipeMiddleware(),

@@ -1,5 +1,8 @@
-import ChooseRecipes from './ChooseRecipes';
-import MenuPlanner from './MenuPlanner';
+/**
+ * TODO do we need to rework this router to support menu ids?
+ */
+import ChooseRecipes from './ChooseRecipesPage';
+import MenuPlanner from './MenuPlannerPage';
 import React from 'react';
 
 const routes = [

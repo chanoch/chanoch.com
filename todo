@@ -1,6 +1,6 @@
-
-Create new menu action - make this the default page for MenuApp
+Why does select recipes for menu always appear?
 Create a select menu action 
+prerender pages
 Integrate history with redux
 Split moveElement into a remove and an add - NORMALISE!
 Combined *Page with Connected*Page
@@ -41,3 +41,4 @@ Layout
 Signature font
 Add mongo recipes api endpoint
 Wire up recipes page to recipes endpoint
+Create new menu action - make this the default page for MenuApp
