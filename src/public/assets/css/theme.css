@@ -6728,6 +6728,11 @@ a.bg-dark:hover
     -webkit-box-pack: end !important;
     justify-content: flex-end !important;
 }
+.justify-content-center
+{
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+}
 
 .justify-content-around
 {
