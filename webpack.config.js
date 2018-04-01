@@ -60,7 +60,6 @@ module.exports = {
     entry: {
         vendor: ['react', 'react-dom', 'axios'],
         index: './src/js/site/index.jsx',
-        menuplanner: './src/js/site/menuplanner.jsx',
     },
     output: {
         path: path.join(__dirname, 'dist/public'),

@@ -27,15 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// redirect port 80 to TLS
-app.use(function(req, res, next) {
-    if(req.get('X-Forwarded-Proto') === 'http') {
-        res.redirect('https://chanoch.com' + req.url);
-    }
-    else
-        next();
-});
-
 // Add Content Source Policy - CSP
 if(process.env.NODE_ENV==='productio') {
     console.log('Setting up CSP');
@@ -96,16 +87,6 @@ if(process.env.NODE_ENV==='productio') {
 
 var contact_form = require('./routes/contact'); // not currently implemented
 app.use(contact_form); // mount contact me form post end point
-
-var recipe_api = require('./routes/recipe_api'); // add recipes listing
-app.use(recipe_api); 
-
-app.use('/menuplanner/', function(req,res) {
-    res.sendFile(path.join(__dirname, '../public/menuplanner.htm'))
-});
-app.use('/menuplanner/*.html', function(req,res) {
-    res.sendFile(path.join(__dirname, '../public/menuplanner.htm'))
-});
 
 // all .html files should end up being service spa
 app.use('*.html', function(req, res) {
