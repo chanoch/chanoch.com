@@ -4820,6 +4820,16 @@ var HomePage = function (_Component) {
                         _home2.default.greeting
                     ),
                     _react2.default.createElement(_Divider2.default, null),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Thanks for visiting my site. I run this to amuse myself.'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Menu Planner is a React playground which I use for mucking about with react and redux.'
+                    ),
                     _react2.default.createElement(_Signature2.default, { text: _home2.default.signature })
                 )
             );
@@ -5469,7 +5479,7 @@ exports = module.exports = __webpack_require__(10)(false);
 
 
 // module
-exports.push([module.i, ".divider_line\n{\n    width: 100%;\n    height: 1px;\n    margin: 1rem 0;\n\n    background-color: #bcbcbc;\n    margin-left: 30px;\n    margin-right: 30px;\n}\n\n", ""]);
+exports.push([module.i, ".divider_line\n{\n    width: 100%;\n    height: 1px;\n    margin: 1rem 0;\n\n    background-color: #bcbcbc;\n    margin-right: 30px;\n}\n\n", ""]);
 
 // exports
 
